@@ -29,13 +29,40 @@ class Calculator {
     this.previousOperand = currentOperand;
     this.currentOperand = "";
   }
+  compute() {
+    let computation;
+    const prev = parseFloat(this.previousOperand);
+    const curr = parseFloat(this.currentOperand);
+
+    if (isNaN(prev) || isNaN(curr)) return;
+
+    switch (this.operation) {
+      case "+":
+        computation = prev + curr;
+        break;
+      case "-":
+        computation = prev - curr;
+        break;
+      case "*":
+        computation = prev * curr;
+        break;
+      case "/":
+        computation = prev / curr;
+        break;
+      default:
+        return;
+    }
+    this.currentOperand = computation;
+    this.operand = undefined;
+    this.previousOperand = "";
+  }
 
   getDisplayNumber(number) {
     const stringNumber = number.toString();
     const integerDigits = parseFloat(stringNumber.split(".")[0]);
     const decimalDigits = stringNumber.split(".")[1];
     let integerDisplay;
-    if (inNaN(integerDigits)) {
+    if (isNaN(integerDigits)) {
       integerDisplay = "";
     } else {
       integerDisplay = integerDigits.toLocaleString("pt", {
