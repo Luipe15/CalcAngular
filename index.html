@@ -1,13 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="./app/bin/angular.min.js"></script>
-</head>
-<body>
-    
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- <div id="calculator-grid" ngController="ControllerCalculator">
+      <div id="output">
+        <input type="text" id="lastOperations"/>
+        <input type="text" id="firstOperations"/>
+      </div>
+      <div>
+        <button id="clear">AC</button>
+        <button id="delete">DEL</button>
+        <button id="operation">/</button>
+        <button id="number">1</button>
+        <button id="number">2</button>
+        <button id="number">3</button>
+        <button id="operation">*</button>
+        <button id="number">4</button>
+        <button id="number">5</button>
+        <button id="number">6</button>
+        <button id="operation">+</button>
+        <button id="number">7</button>
+        <button id="number">8</button>
+        <button id="number">9</button>
+        <button id="operation">-</button>
+        <button id="number">0</button>
+        <button id="number">.</button>
+        <button id="equals">=</button>
+      </div>
+    </div> -->
+    <div ng-app="myCalculator" ng-controller="myControll">
+      <div id="display1" type="number" ng-model="a"></div>
+      <br />
+      <div ng-model="operators">
+        <button id="number" value="1">1</button>
+        <button id="number" value="2">2</button>
+        <button id="number" value="3">3</button>
+        <button id="number" value="4">4</button>
+        <button id="number" value="5">5</button>
+        <button id="number" value="6">6</button>
+        <button id="number" value="7">7</button>
+        <button id="number" value="8">8</button>
+        <button id="number" value="9">9</button>
+        <button id="number" value="0">0</button>
+        <button id="operator" type="button" ng-click="result = a + b">+</button>
+        <button id="operator" type="button" ng-click="result = a - b">-</button>
+        <button id="operator" type="button" ng-click="result = a * b">*</button>
+        <button id="operator" type="button" ng-click="result = a / b">/</button>
+      </div>
+      <!-- <select ng-model="operators">
+        <option>+</option>
+        <option>-</option>
+        <option>*</option>
+        <option>/</option>
+      </select> -->
+      <br />
+      <div id="display2" type="number" ng-model="b"></div>
+
+      <button ng-model="equal" type="button" id="equals">=</button>
+      <p>{{ result }}</p>
+    </div>
+  </body>
+  <script src="scripts.js"></script>
+  <script>
+    angular
+      .module("myCalculator", [])
+      .controller("myControll", function ($scope) {
+        // $scope.result = function () {
+        //   if ($scope.operators == "+") {
+        //     return $scope.a + $scope.b;
+        //   }
+        //   if ($scope.operators == "-") {
+        //     return $scope.a - $scope.b;
+        //   }
+        //   if ($scope.operators == "*") {
+        //     return $scope.a * $scope.b;
+        //   }
+        //   if ($scope.operators == "/") {
+        //     return $scope.a / $scope.b;
+        //   }
+        // };
+      });
+    // const operator = document.querySelectorAll("button#operator");
+
+    // operator.forEach((button) => {
+    //   button.addEventListener("click", () => {
+    //     console.log("passou");
+    //     return button.value;
+    //   });
+    // });
+  </script>
 </html>
