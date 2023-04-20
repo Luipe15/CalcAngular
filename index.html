@@ -36,7 +36,10 @@
       </div>
     </div> -->
     <div ng-app="myCalculator" ng-controller="myControll">
-      <div id="display1" type="number" ng-model="a"></div>
+      <div id="output">
+        <div id="display1" type="number" ng-model="a"></div>
+        <div id="display2" type="number" ng-model="b"></div>
+      </div>
       <br />
       <div ng-model="operators">
         <button id="number" value="1">1</button>
@@ -49,10 +52,10 @@
         <button id="number" value="8">8</button>
         <button id="number" value="9">9</button>
         <button id="number" value="0">0</button>
-        <button id="operator" type="button" ng-click="result = a + b">+</button>
-        <button id="operator" type="button" ng-click="result = a - b">-</button>
-        <button id="operator" type="button" ng-click="result = a * b">*</button>
-        <button id="operator" type="button" ng-click="result = a / b">/</button>
+        <button id="operator" type="button" value="+">+</button>
+        <button id="operator" type="button" value="-">-</button>
+        <button id="operator" type="button" value="*">*</button>
+        <button id="operator" type="button" value="/">/</button>
       </div>
       <!-- <select ng-model="operators">
         <option>+</option>
@@ -61,7 +64,6 @@
         <option>/</option>
       </select> -->
       <br />
-      <div id="display2" type="number" ng-model="b"></div>
 
       <button ng-model="equal" type="button" id="equals">=</button>
       <p>{{ result }}</p>

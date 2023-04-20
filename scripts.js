@@ -1,7 +1,7 @@
 class Calculator {
-  constructor(firstDisplay, secondDisplay) {
-    this.firstDisplay = firstDisplay;
-    this.secondDisplay = secondDisplay;
+  constructor(firstDisplayTextElement, secondDisplayTextElement) {
+    this.firstDisplayTextElement = firstDisplayTextElement;
+    this.secondDisplayTextElement = secondDisplayTextElement;
     this.clear();
   }
 
@@ -12,7 +12,7 @@ class Calculator {
   }
 
   delete() {
-    this.currentOperand = this.currentOperand.toString().slice(0, -1);
+    this.secondDisplay = this.secondDisplay.toString().slice(0, -1);
   }
 
   appendNumber() {
@@ -21,18 +21,18 @@ class Calculator {
   }
 
   chooseOperation(operation) {
-    if (this.currentOperand === "") return;
-    if (this.previousOperand !== "") {
+    if (this.secondDisplay === "") return;
+    if (this.firstDisplay !== "") {
       this.compute();
     }
     this.operation = operation;
-    this.previousOperand = currentOperand;
-    this.currentOperand = "";
+    this.firstDisplay = this.secondDisplay;
+    this.secondDisplay = "";
   }
   compute() {
     let computation;
-    const prev = parseFloat(this.previousOperand);
-    const curr = parseFloat(this.currentOperand);
+    const prev = parseFloat(this.firstDisplay);
+    const curr = parseFloat(this.secondDisplay);
 
     if (isNaN(prev) || isNaN(curr)) return;
 
@@ -52,9 +52,9 @@ class Calculator {
       default:
         return;
     }
-    this.currentOperand = computation;
-    this.operand = undefined;
-    this.previousOperand = "";
+    this.secondDisplay = computation;
+    this.operation = undefined;
+    this.firstDisplay = "";
   }
 
   getDisplayNumber(number) {
@@ -79,28 +79,38 @@ class Calculator {
   updateDisplay() {
     console.log("Passou?");
 
-    this.secondDisplay.innerText = this.getDisplayNumber(this.currentOperand);
+    this.secondDisplayTextElement.innerText = this.getDisplayNumber(
+      this.secondDisplay
+    );
     if (this.operation != null) {
-      this.firstDisplay.innerText = `${this.getDisplayNumber(
-        this.previousOperand
+      this.firstDisplayTextElement.innerText = `${this.getDisplayNumber(
+        this.firstDisplay
       )} ${this.operation}`;
     } else {
-      this.firstDisplay.innerText = "";
+      this.firstDisplayTextElement.innerText = "";
     }
   }
 }
 
 const buttonNumber = document.querySelectorAll("button#number");
 const buttonEqual = document.getElementById("equals");
-const firstDisplay = document.getElementById("display1");
-const secondDisplay = document.getElementById("display2");
+const firstDisplayTextElement = document.getElementById("display1");
+const secondDisplayTextElement = document.getElementById("display2");
+const btnOperators = document.querySelectorAll("button#operator");
 
-const calculator = new Calculator(firstDisplay, secondDisplay);
+const calculator = new Calculator(firstDisplayTextElement, secondDisplayTextElement);
 
 buttonNumber.forEach((button) => {
   button.addEventListener("click", () => {
-    console.log(button.value);
     calculator.appendNumber(button.innerText);
+    calculator.updateDisplay();
+  });
+});
+
+btnOperators.forEach((button) => {
+  button.addEventListener("click", () => {
+    console.log(button.value);
+    calculator.chooseOperation(button.innerText);
     calculator.updateDisplay();
   });
 });
