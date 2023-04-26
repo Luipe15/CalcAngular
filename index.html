@@ -9,93 +9,64 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- <div id="calculator-grid" ngController="ControllerCalculator">
-      <div id="output">
-        <input type="text" id="lastOperations"/>
-        <input type="text" id="firstOperations"/>
-      </div>
-      <div>
-        <button id="clear">AC</button>
-        <button id="delete">DEL</button>
-        <button id="operation">/</button>
-        <button id="number">1</button>
-        <button id="number">2</button>
-        <button id="number">3</button>
-        <button id="operation">*</button>
-        <button id="number">4</button>
-        <button id="number">5</button>
-        <button id="number">6</button>
-        <button id="operation">+</button>
-        <button id="number">7</button>
-        <button id="number">8</button>
-        <button id="number">9</button>
-        <button id="operation">-</button>
-        <button id="number">0</button>
-        <button id="number">.</button>
-        <button id="equals">=</button>
-      </div>
-    </div> -->
     <div ng-app="myCalculator" ng-controller="myControll">
       <div id="output">
-        <div id="display1" type="number" ng-model="a"></div>
-        <div id="display2" type="number" ng-model="b"></div>
+        <div id="display1" type="number" ng-model="a">{{ opNumb }}</div>
+        <div id="display2" type="number" ng-model="b">{{ numb }}</div>
       </div>
       <br />
-      <div ng-model="operators">
-        <button id="number" value="1">1</button>
-        <button id="number" value="2">2</button>
-        <button id="number" value="3">3</button>
-        <button id="number" value="4">4</button>
-        <button id="number" value="5">5</button>
-        <button id="number" value="6">6</button>
-        <button id="number" value="7">7</button>
-        <button id="number" value="8">8</button>
-        <button id="number" value="9">9</button>
-        <button id="number" value="0">0</button>
-        <button id="operator" type="button" value="+">+</button>
-        <button id="operator" type="button" value="-">-</button>
-        <button id="operator" type="button" value="*">*</button>
-        <button id="operator" type="button" value="/">/</button>
+      <div id="keys-calculator">
+        <button id="clear" ng-click="clear()" value="AC">AC</button>
+        <button id="delete" ng-click="delete()" value="DEL">DEL</button>
+        <button id="number" ng-click="upper(1)" value="1">1</button>
+        <button id="number" ng-click="upper(2)" value="2">2</button>
+        <button id="number" ng-click="upper(3)" value="3">3</button>
+        <button id="number" ng-click="upper(4)" value="4">4</button>
+        <button id="number" ng-click="upper(5)" value="5">5</button>
+        <button id="number" ng-click="upper(6)" value="6">6</button>
+        <button id="number" ng-click="upper(7)" value="7">7</button>
+        <button id="number" ng-click="upper(8)" value="8">8</button>
+        <button id="number" ng-click="upper(9)" value="9">9</button>
+        <button id="number" ng-click="upper(0)" value="0">0</button>
+        <button id="operator" ng-click="upper('+')" value="+">+</button>
+        <button id="operator" ng-click="upper('-')" value="-">-</button>
+        <button id="operator" ng-click="upper('*')" value="*">*</button>
+        <button id="operator" ng-click="upper('/')" value="/">/</button>
+        <button id="operator" ng-click="upper('.')" value=".">.</button>
+        <button id="equal" ng-click="evaluate()">=</button>
+        <button id="answer" ng-click="upperAnswer()">Ans</button>
       </div>
-      <!-- <select ng-model="operators">
-        <option>+</option>
-        <option>-</option>
-        <option>*</option>
-        <option>/</option>
-      </select> -->
-      <br />
-
-      <button ng-model="equal" type="button" id="equals">=</button>
-      <p>{{ result }}</p>
     </div>
   </body>
-  <script src="scripts.js"></script>
   <script>
     angular
       .module("myCalculator", [])
       .controller("myControll", function ($scope) {
-        // $scope.result = function () {
-        //   if ($scope.operators == "+") {
-        //     return $scope.a + $scope.b;
-        //   }
-        //   if ($scope.operators == "-") {
-        //     return $scope.a - $scope.b;
-        //   }
-        //   if ($scope.operators == "*") {
-        //     return $scope.a * $scope.b;
-        //   }
-        //   if ($scope.operators == "/") {
-        //     return $scope.a / $scope.b;
-        //   }
-        // };
-      });
-    // const operator = document.querySelectorAll("button#operator");
+        $scope.opNumb = "";
+        $scope.numb = "";
+        $scope.answer = "";
+        $scope.upperAnswer = function () {
+          $scope.opNumb = $scope.opNumb;
+        };
 
-    // operator.forEach((button) => {
-    //   button.addEventListener("click", () => {
-    //     console.log("passou");
-    //     return button.value;
-    //   });
-    // });
+        $scope.upper = function (value) {
+          $scope.opNumb += value;
+        };
+
+        $scope.evaluate = function () {
+          $scope.numb = eval($scope.opNumb);
+          $scope.opNumb = $scope.numb;
+          $scope.numb = "";
+        };
+
+        $scope.delete = function () {
+          $scope.opNumb = $scope.opNumb.substring(0, $scope.opNumb.length - 1);
+        };
+
+        $scope.clear = function () {
+          $scope.opNumb = "";
+          $scope.numb = "";
+        };
+      });
   </script>
 </html>

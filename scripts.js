@@ -109,7 +109,6 @@ buttonNumber.forEach((button) => {
 
 btnOperators.forEach((button) => {
   button.addEventListener("click", () => {
-    console.log(button.value);
     calculator.chooseOperation(button.innerText);
     calculator.updateDisplay();
   });
